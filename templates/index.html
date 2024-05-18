@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER with BERT</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        mark {
+            padding: 0 0.3em;
+            margin: 0 0.1em;
+            line-height: 1;
+            border-radius: 0.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Named Entity Recognition with BERT</h1>
+        <form action="/" method="post">
+            <div class="form-group">
+                <label for="message">Enter your sentence:</label>
+                <textarea class="form-control" id="message" name="message" rows="4">{{ request.form['message'] if request.form else '' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        {% if original_text %}
+        <div class="mt-4">
+            <h2>NER Result</h2>
+            <p><strong>Original Text:</strong></p>
+            <p>{{ original_text }}</p>
+            <p><strong>Recognized Entities:</strong></p>
+            <div style="font-size: 1.2em;">{{ styled_text | safe }}</div>
+            <h2>Entities Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Entity</th>
+                <th>Score</th>
+                <th>Index</th>
+                <th>Word</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+            <tr>
+                <td>{{ entity['index'] }}</td>
+                <td>{{ entity['word'] }}</td>
+                <td>{{ entity['entity'] }}</td>
+                <td>{{ entity['score'] }}</td>
+                <td>{{ entity['start'] }}</td>
+                <td>{{ entity['end'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
