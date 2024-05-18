@@ -12,6 +12,10 @@ app = Flask(__name__)
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 tokenizer = AutoTokenizer.from_pretrained("LampOfSocrates/bert-base-cased-sourav")
 model = AutoModelForTokenClassification.from_pretrained("LampOfSocrates/bert-base-cased-sourav")
+# Mapping labels
+label_map = model.config.id2label
+# Print the label mapping
+print(label_map)
 
 # Load the NER model and tokenizer from Hugging Face
 #ner_pipeline = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english")
@@ -31,7 +35,9 @@ def home():
             start = entity['start']
             end = entity['end']
             label = entity['entity']
-            span = doc.char_span(start, end, label=label)
+            label_id = entity['entity'][6:]  # 'entity' contains labels like 'LABEL_1', 'LABEL_2', etc.
+            actual_label = label_map[int(label_id)]
+            span = doc.char_span(start, end, label=actual_label)
             if span is not None:
                 ents.append(span)
         doc.ents = ents
