@@ -2,7 +2,11 @@
 
 This is the code repository for the group work for NLP Coursework ....
 
-This is a flask app that downloads Huffing Face Models and uses them to do NER tasks
+This is a flask app that downloads Huffing Face Models and uses them to do NER tasks on the PLOD-CW dataset
+
+## Report
+https://docs.google.com/document/d/1A8jxSGcaIkK9WiBqSgG5Bl0lfoXQ_a-4Y4WdSfSkmrE/edit
+
 
 ## Installation 
 
