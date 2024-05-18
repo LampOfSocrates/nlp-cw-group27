@@ -5,14 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NER with BERT</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        mark {
-            padding: 0 0.3em;
-            margin: 0 0.1em;
-            line-height: 1;
-            border-radius: 0.2em;
-        }
-    </style>
+   <!-- <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"> -->
+    
 </head>
 <body>
     <div class="container">
@@ -26,14 +20,15 @@
         </form>
 
         {% if original_text %}
-        <div class="mt-4">
+         
+        <div class="container mt-5">
             <h2>NER Result</h2>
             <p><strong>Original Text:</strong></p>
             <p>{{ original_text }}</p>
             <p><strong>Recognized Entities:</strong></p>
             <div style="font-size: 1.2em;">{{ styled_text | safe }}</div>
             <h2>Entities Table</h2>
-    <table>
+    <table class="table table-custom">
         <thead>
             <tr>
                 <th>Entity</th>
@@ -57,6 +52,7 @@
             {% endfor %}
         </tbody>
     </table>
+    
         </div>
         {% endif %}
     </div>

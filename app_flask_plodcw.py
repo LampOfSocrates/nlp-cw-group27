@@ -23,7 +23,7 @@ def home():
     if request.method == 'POST':
         text = request.form['message']
         entities = ner_pipeline(text)
-    
+        print(entities)
         # Convert HF entities to SpaCy's format
         doc = nlp(text)
         ents = []
@@ -38,6 +38,7 @@ def home():
 
         # Render using displacy
         html = displacy.render(doc, style='ent', page=False)
+        print(html)
         return render_template('index.html', original_text=text, styled_text=html, entities=entities)
     else:
         return render_template('index.html')
