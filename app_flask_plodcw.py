@@ -48,5 +48,14 @@ def home():
         return render_template('index.html', original_text=text, styled_text=html, entities=entities)
     else:
         return render_template('index.html')
+
+@app.route('/train', methods=['POST'])
+def train():
+    start_time = time.time()
+    model = AutoModelForTokenClassification.from_pretrained(local_model_path)
+    end_time = time.time()
+    training_time = end_time - start_time
+    return jsonify({'training_time': training_time})
+
 if __name__ == '__main__':
     app.run(debug=True)
